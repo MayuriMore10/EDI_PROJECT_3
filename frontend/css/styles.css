@@ -1,0 +1,28 @@
+:root{--bg:#0f172a;--panel:#111827;--accent:#06b6d4;--text:#e5e7eb;--muted:#94a3b8}
+*{box-sizing:border-box}
+body,html{margin:0;height:100%;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+#app{display:flex;min-height:100vh}
+.sidebar{width:240px;background:var(--panel);padding:24px;position:sticky;top:0;height:100vh}
+.sidebar h2{margin:0 0 16px;font-weight:700}
+.nav-link{display:block;padding:10px 12px;margin:6px 0;border-radius:8px;color:var(--text);text-decoration:none;transition:background .2s, transform .1s}
+.nav-link:hover{background:#1f2937;transform:translateX(4px)}
+.nav-link.active{background:linear-gradient(90deg, rgba(6,182,212,.2), transparent)}
+.content{flex:1;padding:32px}
+.hidden{display:none}
+.upload-card{background:#0b1220;border:1px solid #1f2937;padding:16px;border-radius:12px;max-width:560px}
+.upload-card label{display:block;margin:12px 0}
+.upload-card input{display:block;margin-top:6px}
+.upload-card button{background:var(--accent);border:none;color:#002431;padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:600}
+.upload-card button:hover{filter:brightness(1.1)}
+.error{color:#fca5a5;margin-top:8px}
+.table{width:100%;border-collapse:collapse;margin-top:16px}
+.table th,.table td{border:1px solid #1f2937;padding:8px;text-align:left}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;background:#1f2937;color:var(--muted)}
+.filters{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.filter-btn{background:#1f2937;color:#e5e7eb;border:1px solid #334155;padding:6px 10px;border-radius:8px;cursor:pointer}
+.filter-btn.active{outline:2px solid var(--accent)}
+#searchField{background:#0b1220;border:1px solid #334155;color:#e5e7eb;padding:6px 10px;border-radius:8px;flex:0 0 240px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.code{background:#0b1220;border:1px solid #1f2937;border-radius:8px;padding:12px;overflow:auto;max-height:60vh}
+
+
