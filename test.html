@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Routing Test</title>
+    <style>
+        .hidden { display: none; }
+        .cta-btn { padding: 10px 20px; background: blue; color: white; text-decoration: none; margin: 10px; display: inline-block; }
+        .cta-btn.secondary { background: gray; }
+        #authRequired { padding: 20px; text-align: center; }
+        .route { padding: 20px; border: 1px solid #ccc; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div id="authRequired">
+        <h1>Authentication Required</h1>
+        <a href="#login" class="cta-btn" onclick="console.log('Login clicked'); showRoute('login'); return false;">Login</a>
+        <a href="#signup" class="cta-btn secondary" onclick="console.log('Signup clicked'); showRoute('signup'); return false;">Sign Up</a>
+        <br>
+        <button onclick="showRoute('login')">Test Login</button>
+        <button onclick="showRoute('signup')">Test Signup</button>
+    </div>
+    
+    <section id="login" class="route hidden">
+        <h2>Login Page</h2>
+        <p>This is the login page</p>
+        <button onclick="showRoute('home')">Go to Home</button>
+    </section>
+    
+    <section id="signup" class="route hidden">
+        <h2>Signup Page</h2>
+        <p>This is the signup page</p>
+        <button onclick="showRoute('home')">Go to Home</button>
+    </section>
+    
+    <section id="home" class="route hidden">
+        <h2>Home Page</h2>
+        <p>This is the home page</p>
+    </section>
+
+    <script>
+        const routes = ["home", "login", "signup"];
+        
+        function showRoute(id) {
+            console.log('=== showRoute called with:', id);
+            
+            // Hide all routes first
+            routes.forEach(r => {
+                const element = document.getElementById(r);
+                if (element) {
+                    element.classList.add('hidden');
+                    console.log('Hiding route:', r);
+                } else {
+                    console.log('Route element not found:', r);
+                }
+            });
+            
+            // Hide auth required screen
+            const authRequired = document.getElementById('authRequired');
+            if (authRequired) {
+                authRequired.classList.add('hidden');
+                console.log('Hiding auth required screen');
+            }
+            
+            // Show the requested route
+            const targetElement = document.getElementById(id);
+            console.log('Target element for', id, ':', targetElement);
+            if (targetElement) {
+                targetElement.classList.remove('hidden');
+                console.log('Route shown successfully:', id);
+            } else {
+                console.error('Route not found:', id);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded');
+            showRoute('home'); // This will show auth required
+        });
+    </script>
+</body>
+</html>

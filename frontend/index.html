@@ -8,66 +8,233 @@
   </head>
   <body>
     <div id="app">
-      <aside class="sidebar">
+      <aside class="sidebar" id="sidebar">
         <h2>EDI 810</h2>
         <nav>
           <a href="#home" class="nav-link active">Home</a>
-          <a href="#simulate" class="nav-link">Simulate</a>
-          <a href="#summary" class="nav-link">Summary</a>
-          <a href="#view" class="nav-link">Viewing</a>
+          <a href="#simulate" class="nav-link" id="simulateLink">Simulate</a>
+          <a href="#summary" class="nav-link" id="summaryLink">Summary</a>
+          <a href="#view" class="nav-link" id="viewLink">Viewing</a>
         </nav>
       </aside>
-      <main class="content">
-        <section id="home" class="route">
-          <h1>Welcome to EDI 810 Invoice Validator</h1>
-          <p>
-            Upload an EDI 810 specification (PDF) and a sample EDI file to
-            validate required fields and detect extras. The app converts both
-            to XML, compares them, and shows missing mandatory fields and
-            additional fields in your sample.
-          </p>
+      <main class="content" id="mainContent">
+        <section id="home" class="route hidden">
+          <div class="hero">
+            <h1>EDI 810 Invoice Validator</h1>
+            <p>
+              Upload your EDI 810 specification and sample files to validate required fields, 
+              detect missing mandatory elements, and ensure compliance with X12 standards.
+            </p>
+          </div>
+
+          <div class="info-section">
+            <h2>Understanding EDI 810</h2>
+            <div class="cards">
+              <div class="card featured">
+                <div class="card-header">
+                  <div class="card-icon blue">📄</div>
+                  <h3>What is EDI 810?</h3>
+                </div>
+                <p>
+                  The X12 Invoice message standard for electronic billing. Communicates seller/buyer 
+                  information, invoice details, line items, pricing, charges, and totals between trading partners.
+                </p>
+                <div class="info-list">
+                  <div class="info-item">
+                    <strong>Purpose:</strong> Electronic invoice transmission between trading partners
+                  </div>
+                  <div class="info-item">
+                    <strong>Standard:</strong> X12 EDI Transaction Set 810
+                  </div>
+                  <div class="info-item">
+                    <strong>Key Data:</strong> Invoice numbers, dates, line items, pricing, totals
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon green">📋</div>
+                  <h3>Header Segments</h3>
+                </div>
+                <p>Transaction identification and invoice details</p>
+                <div class="info-list">
+                  <div class="info-item">
+                    <strong>ST Segment:</strong> Transaction set header with control numbers
+                  </div>
+                  <div class="info-item">
+                    <strong>BIG Segment:</strong> Invoice date, number, and purchase order references
+                  </div>
+                  <div class="info-item">
+                    <strong>REF/DTM:</strong> Additional references and date/time information
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon purple">🏢</div>
+                  <h3>Parties & Address</h3>
+                </div>
+                <p>Seller and buyer identification and location data</p>
+                <div class="info-list">
+                  <div class="info-item">
+                    <strong>N1 Segment:</strong> Party identification (seller, buyer, remit-to)
+                  </div>
+                  <div class="info-item">
+                    <strong>N3/N4 Segments:</strong> Street address and geographic location
+                  </div>
+                  <div class="info-item">
+                    <strong>Contact Info:</strong> Phone numbers and contact details
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon orange">📦</div>
+                  <h3>Line Items</h3>
+                </div>
+                <p>Product details, quantities, and pricing information</p>
+                <div class="info-list">
+                  <div class="info-item">
+                    <strong>IT1 Segment:</strong> Item details, quantities, and unit pricing
+                  </div>
+                  <div class="info-item">
+                    <strong>PID Segment:</strong> Product descriptions and characteristics
+                  </div>
+                  <div class="info-item">
+                    <strong>Product IDs:</strong> UPC, SKU, and other product identifiers
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon red">💰</div>
+                  <h3>Charges & Totals</h3>
+                </div>
+                <p>Allowances, charges, taxes, and transaction totals</p>
+                <div class="info-list">
+                  <div class="info-item">
+                    <strong>SAC Segment:</strong> Allowances, charges, and adjustments
+                  </div>
+                  <div class="info-item">
+                    <strong>CTT Segment:</strong> Transaction totals and line counts
+                  </div>
+                  <div class="info-item">
+                    <strong>SE Segment:</strong> Transaction set trailer with counts
+                  </div>
+                </div>
+              </div>
+
+              <div class="card featured">
+                <div class="card-header">
+                  <div class="card-icon indigo">⚙️</div>
+                  <h3>Validation Process</h3>
+                </div>
+                <p>How our tool analyzes your EDI files</p>
+                <div class="compact-steps">
+                  <div class="compact-step">
+                    <span class="step-number">1</span>
+                    <div>
+                      <strong>Parse Specification</strong>
+                      <span>Extract M/O/X field requirements</span>
+                    </div>
+                  </div>
+                  <div class="compact-step">
+                    <span class="step-number">2</span>
+                    <div>
+                      <strong>Parse EDI Sample</strong>
+                      <span>Detect present fields and values</span>
+                    </div>
+                  </div>
+                  <div class="compact-step">
+                    <span class="step-number">3</span>
+                    <div>
+                      <strong>Compare & Analyze</strong>
+                      <span>Highlight missing and additional fields</span>
+                    </div>
+                  </div>
+                  <div class="compact-step">
+                    <span class="step-number">4</span>
+                    <div>
+                      <strong>Generate Reports</strong>
+                      <span>Create summaries and compliance reports</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-section">
+            <h2>Ready to Validate Your EDI 810?</h2>
+            <p>Upload your specification and sample files to get started with comprehensive field validation and compliance analysis.</p>
+            <div class="cta-buttons">
+              <a href="#simulate" class="cta-btn">Start Validation</a>
+              <a href="#summary" class="cta-btn secondary">View Sample Results</a>
+            </div>
+          </div>
         </section>
 
         <section id="simulate" class="route hidden">
           <h1>Simulate</h1>
           <div class="upload-card">
             <label>
-              Upload EDI Specification (PDF)
-              <input type="file" id="specFile" accept="application/pdf">
+              Upload Document Specification (PDF, DOC, DOCX, TXT)
+              <input type="file" id="specFile" accept=".pdf,.doc,.docx,.txt,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain">
             </label>
             <label>
-              Upload EDI Sample (EDI/TXT)
-              <input type="file" id="ediFile" accept=".edi,.txt">
+              Upload EDI 810 Sample (EDI/TXT)
+              <input type="file" id="ediFile" accept=".edi,.txt,text/plain">
             </label>
             <button id="btnProcess">Process</button>
             <div id="error" class="error"></div>
+            <div id="loading" class="loading hidden">
+              <div class="spinner"></div>
+              <span>Processing files... This may take a moment for large documents.</span>
+            </div>
           </div>
         </section>
 
         <section id="summary" class="route hidden">
-          <h1>Summary</h1>
+          <h1>Field Comparison Summary</h1>
+          <div class="download-buttons">
+            <button id="btnDownloadJson" class="download-btn">
+              📄 Download Summary (JSON)
+            </button>
+            <button id="btnDownloadCSV" class="download-btn secondary">
+              📊 Download Fields (CSV)
+            </button>
+          </div>
           <div class="filters">
-            <button class="filter-btn" data-type="mandatory">Mandatory (M)</button>
-            <button class="filter-btn" data-type="optional">Optional (O)</button>
-            <button class="filter-btn" data-type="missing">Missing</button>
-            <input id="searchField" placeholder="Search field e.g., BIG01" />
+            <button class="filter-btn" data-type="all">All Fields</button>
+            <button class="filter-btn" data-type="mandatory">Mandatory</button>
+            <button class="filter-btn" data-type="optional">Optional</button>
+            <button class="filter-btn" data-type="present">Present in EDI</button>
+            <button class="filter-btn" data-type="missing">Missing from EDI</button>
+            <input id="searchField" placeholder="Search field e.g., BIG01, ISA01" />
           </div>
           <div id="summaryContent"></div>
         </section>
 
         <section id="view" class="route hidden">
-          <h1>Viewing</h1>
+          <h1>XML Viewing</h1>
+          <p style="margin-bottom:20px;color:var(--text-light);">Compare your specification and EDI sample XML side-by-side</p>
           <div class="split">
-            <div>
-              <h3>Specification (XML)</h3>
+            <div class="code-container">
+              <h3>📋 Specification XML</h3>
               <pre id="specXML" class="code"></pre>
             </div>
-            <div>
-              <h3>EDI Sample (XML)</h3>
+            <div class="code-container">
+              <h3>📄 EDI Sample XML</h3>
               <pre id="ediXML" class="code"></pre>
             </div>
           </div>
         </section>
+
+
       </main>
     </div>
     <script src="./js/app.js"></script>
